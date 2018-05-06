@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*-
 user = input("pleas input username:")
-print("welcome "+user)
+print('欢迎', user)
+print("welcome " + user)
