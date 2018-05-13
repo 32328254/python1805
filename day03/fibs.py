@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*-
-"""菲薄纳妾数列"""
+"""数列"""
 list = [0,1]
 
 len = int(input('length:'))
