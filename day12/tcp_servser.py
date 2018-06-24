@@ -19,12 +19,13 @@ addr = (host,port)
 s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 #设置服务器在停止后,可以立即启动,地址默认保留60s
 s.setsockopt(socket.SOL_SOCKET,socket.SO_REUSEADDR,1)
-s.bind(address=addr) #为套接字绑定地址
+s.bind(addr) #为套接字绑定地址
 s.listen(1) #启动监听
 cli_sock,cli_addr = s.accept() #accept返回客户端套接字和地址
 print("client connected from:",cli_addr)
 data = cli_sock.recv(1024) #接受客户端数据,最多1024字节
 print(data)
+if data == " ":
+    cli_sock.close()  #关闭客户端
+    s.close()  #关闭服务端
 cli_sock.send(b'how are you\r\n') #发生数据
-cli_sock.close()  #关闭客户端
-s.close()  #关闭服务端
