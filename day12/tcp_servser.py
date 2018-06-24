@@ -25,7 +25,7 @@ cli_sock,cli_addr = s.accept() #accept返回客户端套接字和地址
 print("client connected from:",cli_addr)
 data = cli_sock.recv(1024) #接受客户端数据,最多1024字节
 print(data)
-if data == " ":
+if data == b"q":
     cli_sock.close()  #关闭客户端
     s.close()  #关闭服务端
 cli_sock.send(b'how are you\r\n') #发生数据
