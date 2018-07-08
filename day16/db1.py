@@ -40,4 +40,63 @@ MariaDB [tarena]> create table salary(auto_id int auto_increment,date DATE,emp_i
 MariaDB [tarena]> insert into departments values(1,'人事部');
 MariaDB [tarena]> insert into employees values(1,'zs','male','12345678901','zs@qq.com,',1);
 MariaDB [tarena]> insert into salary(date,emp_id,basic,awards) values('2018-07-07',1,1000,1000);
+MariaDB [tarena]> insert into departments values(2,'dev'); #插入一条数据
+MariaDB [tarena]> delete from salary; #清空表
+MariaDB [tarena]> delete from employees where emp_id=1; #删除emp_id为1的数据
+MariaDB [tarena]> update departments set dep_name='hr' where dep_id=1; #更新dep_id为1的dep_name记录
+MariaDB [tarena]> select emp_name,phone from employees;
+MariaDB [tarena]> select emp_name as name ,phone as 'tel-phone' from employees;
+MariaDB [tarena]> select emp_id, phone from employees where dep_id=1;
+MariaDB [tarena]> insert into employees values(1,'bob','male','12345678901','jd@mail.com',1);
+MariaDB [tarena]> select * from employees where emp_name like 'j%'; #查询name以j开头的记录
+MariaDB [tarena]> select e.emp_name,d.dep_name from employees as e join departments as d; #表别名，多表查询,返回笛卡尔集.
+MariaDB [tarena]> select e.emp_name,d.dep_name from employees as e join departments as d where e.dep_id=d.dep_id;#加查询条件
+MariaDB [tarena]> insert into salary(date,emp_id,basic,awards) values(now(),3,333333,333333); #使用了now()的sql函数
+MariaDB [tarena]> select emp_id,basic + awards as counts from salary;
+MariaDB [tarena]> select e.emp_name as name,s.basic+s.awards as gongzi from employees as e join salary as s where e.emp_id=s.emp_id; #多表查询,
++------+--------+
+| name | gongzi |
++------+--------+
+| bob  |  22222 |
+| hah  |  24444 |
+| hah  | 355555 |
+| jj   | 666666 |
++------+--------+
+MariaDB [tarena]> select e.emp_name as name,s.basic+s.awards as gongzi from employees as e join salary as s where e.emp_id=s.emp_id order by gongzi;#按工资排序
++------+--------+
+| name | gongzi |
++------+--------+
+| bob  |  22222 |
+| hah  |  24444 |
+| hah  | 355555 |
+| jj   | 666666 |
++------+--------+
+ 
+MariaDB [tarena]> select e.emp_name as name,s.basic+s.awards as gongzi from employees as e join salary as s where e.emp_id=s.emp_id order by gongzi desc; #工资按降序排序
++------+--------+
+| name | gongzi |
++------+--------+
+| jj   | 666666 |
+| hah  | 355555 |
+| hah  |  24444 |
+| bob  |  22222 |
++------+--------+
+MariaDB [tarena]> select e.emp_name as name,s.basic+s.awards as gongzi from employees as e join salary as s where e.emp_id=s.emp_id order by gongzi desc limit 3; #限制查询个数
++------+--------+
+| name | gongzi |
++------+--------+
+| jj   | 666666 |
+| hah  | 355555 |
+| hah  |  24444 |
++------+--------+
+MariaDB [tarena]> select e.emp_name as name,s.basic+s.awards as gongzi from employees as e join salary as s where e.emp_id=s.emp_id order by gongzi desc limit 1,3;#查从1开始连续取3条记录.
++------+--------+
+| name | gongzi |
++------+--------+
+| hah  | 355555 |
+| hah  |  24444 |
+| bob  |  22222 |
++------+--------+
+
+
 """
