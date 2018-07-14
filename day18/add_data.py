@@ -4,11 +4,11 @@ from dbconn import Departments,Session,Employees,Salary
 
 
 session = Session() #创建session会话
-# dev = Departments(dep_name='development')
-# print(dev.dep_name)
-# print(dev.dep_id)
-# dev = Departments(dep_name="人事部",dep_id=2)
-# session.add(dev) #添加一个
+dev = Departments(dep_name='development')
+print(dev.dep_name)
+print(dev.dep_id)
+dev = Departments(dep_name="人事部",dep_id=2)
+session.add(dev) #添加一个
 ops = Departments(dep_name="运维部")
 finance = Departments(dep_name="财务部")
 
